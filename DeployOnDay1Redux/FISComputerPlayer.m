@@ -12,12 +12,22 @@
 
 +(BOOL)isEnabled
 {
-    return NO;
+    return YES;
 }
 
 -(FISTicTacToePosition)nextPlay
 {
-    return FISTicTacToePositionMake(0, 0);
+    NSUInteger count = 0;
+    NSUInteger i = arc4random_uniform(3);
+    NSUInteger j = arc4random_uniform(3);
+    
+    while (![self.game canPlayAtColumn:i row:j] && count < 9) {
+        i = arc4random_uniform(3);
+        j = arc4random_uniform(3);
+        count++;
+    }
+    
+    return FISTicTacToePositionMake(i, j);
 }
 
 @end
